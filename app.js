@@ -3,7 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('dotenv').config();
-const { createUserTable } = require('./models/userModel');
+const { createUserTable } = require('./Models/userModel');
 const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoute');
 
@@ -32,11 +32,10 @@ app.set('views', path.join(__dirname, 'views'));
 // const adminRoutes = require('./routes/adminRoutes');
 const authRoutes = require('./routes/authRoutes');  // Correct path (no extra space)
 ;
-const { createFoodTable } = require('./models/foodModel');
+const { createFoodTable } = require('./Models/foodModel');
 createFoodTable();
 
 
-app.use('/', authRoutes);
 // app.use('/', adminRoutes);
 app.use('/', authRoutes);
 app.use('/admin', adminRoutes);
