@@ -1,15 +1,21 @@
-const pgp = require('pg-promise')();
-require('dotenv').config();
 
+
+require('dotenv').config();
+const pgp = require('pg-promise')();
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const db = pgp({
   host: process.env.DB_HOST,
   port: 5432,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS
+  password: process.env.DB_PASS,
+  ...(isProduction && {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  }),
 });
 
-
 module.exports = db;
-
